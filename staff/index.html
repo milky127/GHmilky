@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aldergate — Staff System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+  if(!sessionStorage.getItem('milkyStaffUser')){
+    window.location.replace('login.html');
+  }
+</script>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">Milky Guest House</div>
+      <div class="sub">Staff System</div>
+    </div>
+    <nav id="nav">
+      <button data-tab="dashboard">
+        <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <span class="label">Dashboard</span>
+      </button>
+      <button data-tab="rooms">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M5 21V4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v17"/><path d="M14 10v11"/><path d="M18 10v11"/><path d="M14 6h4a1 1 0 0 1 1 1v14"/><circle cx="10" cy="12" r="0.8" fill="currentColor" stroke="none"/></svg></span>
+        <span class="label">Rooms</span>
+      </button>
+      <button data-tab="bookings">
+        <span class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg></span>
+        <span class="label">Bookings</span>
+      </button>
+      <button data-tab="guests">
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"/></svg></span>
+        <span class="label">Guests</span>
+      </button>
+      <button data-tab="staff">
+        <span class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><path d="M16 4.5a3 3 0 0 1 0 6"/><path d="M18 13.5c2.3.6 4 2.6 4 5"/></svg></span>
+        <span class="label">Staff</span>
+      </button>
+      <button data-tab="food">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M6 2v8a2 2 0 0 0 4 0V2"/><path d="M8 2v20"/><path d="M17 2c-2 0-3 2-3 5s1 4 3 4v11"/></svg></span>
+        <span class="label">Food Orders</span>
+      </button>
+    </nav>
+    <div class="sidebar-foot"><a href="../index.html" style="color:#8B93A6;text-decoration:none;">← Back to website</a><br><br><span id="staffUserLabel">Front Desk</span><br>Shift: Morning<br><a href="#" id="logoutLink" style="color:#8B93A6;text-decoration:none;display:inline-block;margin-top:8px;">Log out</a></div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="meta" id="pageMeta">Overview of tonight's house</div>
+      </div>
+      <div class="topbar-right">
+        <div class="clock" id="clock"></div>
+        <div class="avatar">MH</div>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modalBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="../hotel-data.js"></script>
+<script src="script.js"></script>
+<script>
+  const staffUser = sessionStorage.getItem('milkyStaffUser');
+  if(staffUser){
+    document.getElementById('staffUserLabel').textContent = 'Signed in as ' + staffUser;
+  }
+  document.getElementById('logoutLink').addEventListener('click', function(e){
+    e.preventDefault();
+    sessionStorage.removeItem('milkyStaffUser');
+    window.location.href = 'login.html';
+  });
+</script>
+</body>
+</html>
